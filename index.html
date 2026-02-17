@@ -648,6 +648,10 @@
     line-height: 1;
     letter-spacing: 0.05em;
     text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    padding: 0 16px;
   }
 
   @keyframes kanaReveal {
@@ -1352,6 +1356,24 @@ document.getElementById('restart-btn').addEventListener('click', () => {
 });
 
 // ══════════════════════════════════════
+// FIT KANA TEXT
+// ══════════════════════════════════════
+function fitKanaText() {
+  const maxSize = 88;
+  const minSize = 28;
+  const padding = 32; // total horizontal padding inside card
+  kanaDisplay.style.fontSize = maxSize + 'px';
+  const available = kanaDisplay.parentElement.offsetWidth - padding;
+  if (available <= 0) return;
+  const textWidth = kanaDisplay.scrollWidth;
+  if (textWidth > available) {
+    const ratio = available / textWidth;
+    const fitted = Math.max(minSize, Math.floor(maxSize * ratio));
+    kanaDisplay.style.fontSize = fitted + 'px';
+  }
+}
+
+// ══════════════════════════════════════
 // RENDER CARD
 // ══════════════════════════════════════
 function renderCard(dir = 'right') {
@@ -1376,6 +1398,7 @@ function renderCard(dir = 'right') {
   const kana = card.kana[settings.script];
   kanaDisplay.textContent = kana;
   kanaRomajiBack.textContent = card.romaji;
+  requestAnimationFrame(fitKanaText);
 
   // Animation
   cardScene.classList.remove('anim-right', 'anim-left');
@@ -1579,7 +1602,7 @@ function speak(text) {
   cancelSpeech();
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'ja-JP';
-  utter.rate = 0.1;
+  utter.rate = 0.85;
   utter.pitch = 1.0;
   currentUtterance = utter;
 
