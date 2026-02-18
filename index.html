@@ -1319,6 +1319,12 @@ function flipCard() {
   }
 }
 
+function resetCardToFront() {
+  isFlipped = false;
+  cardInner.classList.remove('flipped');
+  cardInner.style.transform = '';
+}
+
 cardScene.addEventListener('click', (e) => {
   if (e.target === soundBtn || soundBtn.contains(e.target)) return;
   flipCard();
@@ -1332,6 +1338,7 @@ function nextCard() {
     showComplete();
     return;
   }
+  resetCardToFront();
   currentIndex++;
   renderCard('right');
   cancelSpeech();
@@ -1339,6 +1346,7 @@ function nextCard() {
 
 function prevCard() {
   if (currentIndex <= 0) return;
+  resetCardToFront();
   currentIndex--;
   renderCard('left');
   cancelSpeech();
