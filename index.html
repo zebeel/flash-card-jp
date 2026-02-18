@@ -564,7 +564,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 80px;
+    font-size: 180px;
     opacity: 0;
     transition: opacity 0.2s ease;
   }
@@ -1018,436 +1018,35 @@
 // ══════════════════════════════════════
 // DATA
 // ══════════════════════════════════════
-const DATA = {
-  version: "1.0",
-  topics: [
-    { id: "shinkansen", name: "新幹線", emoji: "🚄" },
-    { id: "animals",    name: "動物",   emoji: "🐾" }
-  ],
-  cards: [
-    // 新幹線（Tokaido / Sanyo / Kyushu）
-    {
-      id: "nozomi",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/nozomi.jpg",
-      kana: { hiragana: "のぞみ", katakana: "ノゾミ" },
-      romaji: "nozomi",
-    },
-    {
-      id: "mizuho",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/mizuho.jpg",
-      kana: { hiragana: "みずほ", katakana: "ミズホ" },
-      romaji: "mizuho",
-    },
-    {
-      id: "hikari",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/hikari.jpg",
-      kana: { hiragana: "ひかり", katakana: "ヒカリ" },
-      romaji: "hikari",
-    },
-    {
-      id: "sakura",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/sakura.jpg",
-      kana: { hiragana: "さくら", katakana: "サクラ" },
-      romaji: "sakura",
-    },
-    {
-      id: "kodama",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/kodama.jpg",
-      kana: { hiragana: "こだま", katakana: "コダマ" },
-      romaji: "kodama",
-    },
-    {
-      id: "tsubame",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/tsubame.jpg",
-      kana: { hiragana: "つばめ", katakana: "ツバメ" },
-      romaji: "tsubame",
-    },
-
-    // 新幹線（Tohoku / Hokkaido / Akita / Yamagata）
-    {
-      id: "hayabusa",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/hayabusa.jpg",
-      kana: { hiragana: "はやぶさ", katakana: "ハヤブサ" },
-      romaji: "hayabusa",
-    },
-    {
-      id: "hayate",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/hayate.jpg",
-      kana: { hiragana: "はやて", katakana: "ハヤテ" },
-      romaji: "hayate",
-    },
-    {
-      id: "yamabiko",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/yamabiko.jpg",
-      kana: { hiragana: "やまびこ", katakana: "ヤマビコ" },
-      romaji: "yamabiko",
-    },
-    {
-      id: "nasuno",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/nasuno.jpg",
-      kana: { hiragana: "なすの", katakana: "ナスノ" },
-      romaji: "nasuno",
-    },
-    {
-      id: "komachi",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/komachi.jpg",
-      kana: { hiragana: "こまち", katakana: "コマチ" },
-      romaji: "komachi",
-    },
-    {
-      id: "tsubasa",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/tsubasa.jpg",
-      kana: { hiragana: "つばさ", katakana: "ツバサ" },
-      romaji: "tsubasa",
-    },
-
-    // 新幹線（Joetsu）
-    {
-      id: "toki",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/toki.jpg",
-      kana: { hiragana: "とき", katakana: "トキ" },
-      romaji: "toki",
-    },
-    {
-      id: "tanigawa",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/tanigawa.jpg",
-      kana: { hiragana: "たにがわ", katakana: "タニガワ" },
-      romaji: "tanigawa",
-    },
-
-    // 新幹線（Hokuriku）
-    {
-      id: "kagayaki",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/kagayaki.jpg",
-      kana: { hiragana: "かがやき", katakana: "カガヤキ" },
-      romaji: "kagayaki",
-    },
-    {
-      id: "hakutaka",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/hakutaka.jpg",
-      kana: { hiragana: "はくたか", katakana: "ハクタカ" },
-      romaji: "hakutaka",
-    },
-    {
-      id: "asama",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/asama.jpg",
-      kana: { hiragana: "あさま", katakana: "アサマ" },
-      romaji: "asama",
-    },
-    {
-      id: "tsurugi",
-      topicId: "shinkansen",
-      image: "./asset/images/shinkansen/tsurugi.jpg",
-      kana: { hiragana: "つるぎ", katakana: "ツルギ" },
-      romaji: "tsurugi",
-    },
-    // JR 電車
-    {
-      id: "yamanote",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Yamanote-Line-E235.jpg",
-      kana: { hiragana: "やまのてせん", katakana: "ヤマノテセン" },
-      romaji: "yamanote sen",
-    },
-    {
-      id: "chuo_rapid",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/JRE_Chuo-Rapid-Line_Series-E233-0.jpg",
-      kana: { hiragana: "ちゅうおうかいそくせん", katakana: "チュウオウカイソクセン" },
-      romaji: "chuo rapid line",
-    },
-    {
-      id: "keihin_tohoku",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Series-E233-1000-113.jpg",
-      kana: { hiragana: "けいひんとうほくせん", katakana: "ケイヒントウホクセン" },
-      romaji: "keihin-tohoku sen",
-    },
-    {
-      id: "saikyo",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Saikyo-Line_E233-7000_127F.jpg",
-      kana: { hiragana: "さいきょうせん", katakana: "サイキョウセン" },
-      romaji: "saikyo sen",
-    },
-
-    // 東京メトロ 地下鉄
-    {
-      id: "ginza",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo_Metro_1000_ginza_line.JPG",
-      kana: { hiragana: "ぎんざせん", katakana: "ギンザセン" },
-      romaji: "ginza sen",
-    },
-    {
-      id: "marunouchi",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo-Metro_Series2000-2026.jpg",
-      kana: { hiragana: "まるのうちせん", katakana: "マルノウチセン" },
-      romaji: "marunouchi sen",
-    },
-    {
-      id: "hanzomon",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo-Metro_Series8000-8015.jpg",
-      kana: { hiragana: "はんぞうもんせん", katakana: "ハンゾウモンセン" },
-      romaji: "hanzomon sen",
-    },
-    {
-      id: "tozai",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo-Metro_Series15000-15001.jpg",
-      kana: { hiragana: "とうざいせん", katakana: "トウザイセン" },
-      romaji: "tozai sen",
-    },
-    {
-      id: "fukutoshin",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Tokyo-Metro-Series17000_17005.jpg",
-      kana: { hiragana: "ふくとしんせん", katakana: "フクトシンセン" },
-      romaji: "fukutoshin sen",
-    },
-
-    // 都営地下鉄
-    {
-      id: "oedo",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Toei-subway12-600.jpg",
-      kana: { hiragana: "おおえどせん", katakana: "オオエドセン" },
-      romaji: "oedo sen",
-    },
-
-    // 大阪メトロ
-    {
-      id: "midosuji",
-      topicId: "shinkansen",
-      image: "https://commons.wikimedia.org/wiki/Special:FilePath/Osaka-Metro_Series30000.jpg",
-      kana: { hiragana: "みどうすじせん", katakana: "ミドウスジセン" },
-      romaji: "midosuji sen",
-    },
-    // 動物
-    { id:"lion", title:"Lion", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Lion_waiting_in_Namibia.jpg/500px-Lion_waiting_in_Namibia.jpg",
-      kana:{hiragana:"らいおん",katakana:"ライオン"}, romaji:"raion", emoji:"🦁"},
-
-    { id:"tiger", title:"Tiger", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Walking_tiger_female.jpg/500px-Walking_tiger_female.jpg",
-      kana:{hiragana:"とら",katakana:"トラ"}, romaji:"tora", emoji:"🐯"},
-
-    { id:"elephant", title:"African bush elephant", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/African_Bush_Elephant.jpg/500px-African_Bush_Elephant.jpg",
-      kana:{hiragana:"ぞう",katakana:"ゾウ"}, romaji:"zou", emoji:"🐘"},
-
-    { id:"giraffe", title:"Giraffe", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/500px-Giraffe_Mikumi_National_Park.jpg",
-      kana:{hiragana:"きりん",katakana:"キリン"}, romaji:"kirin", emoji:"🦒"},
-
-    { id:"panda", title:"Giant panda", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Grosser_Panda.JPG/500px-Grosser_Panda.JPG",
-      kana:{hiragana:"ぱんだ",katakana:"パンダ"}, romaji:"panda", emoji:"🐼"},
-
-    { id:"dog", title:"Dog", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/YellowLabradorLooking_new.jpg/500px-YellowLabradorLooking_new.jpg",
-      kana:{hiragana:"いぬ",katakana:"イヌ"}, romaji:"inu", emoji:"🐶"},
-
-    { id:"cat", title:"Cat", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Cat_August_2010-4.jpg/500px-Cat_August_2010-4.jpg",
-      kana:{hiragana:"ねこ",katakana:"ネコ"}, romaji:"neko", emoji:"🐱"},
-
-    { id:"rabbit", title:"Rabbit", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Oryctolagus_cuniculus_Rcdo.jpg/500px-Oryctolagus_cuniculus_Rcdo.jpg",
-      kana:{hiragana:"うさぎ",katakana:"ウサギ"}, romaji:"usagi", emoji:"🐰"},
-
-    { id:"bear", title:"Brown bear", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/2010-kodiak-bear-1.jpg/500px-2010-kodiak-bear-1.jpg",
-      kana:{hiragana:"くま",katakana:"クマ"}, romaji:"kuma", emoji:"🐻"},
-
-    { id:"wolf", title:"Wolf", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Kolmarden_wolf.jpg/500px-Kolmarden_wolf.jpg",
-      kana:{hiragana:"おおかみ",katakana:"オオカミ"}, romaji:"ookami", emoji:"🐺"},
-
-    { id:"fox", title:"Red fox", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Vulpes_vulpes_ssp_fulvus.jpg/500px-Vulpes_vulpes_ssp_fulvus.jpg",
-      kana:{hiragana:"きつね",katakana:"キツネ"}, romaji:"kitsune", emoji:"🦊"},
-
-    { id:"deer", title:"Sika deer", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Sika_deer_%28Cervus_nippon%29_-_male_edit.jpg/500px-Sika_deer_%28Cervus_nippon%29_-_male_edit.jpg",
-      kana:{hiragana:"しか",katakana:"シカ"}, romaji:"shika", emoji:"🦌"},
-
-    { id:"monkey", title:"Japanese macaque", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Macaca_fuscata_fuscata1.jpg/500px-Macaca_fuscata_fuscata1.jpg",
-      kana:{hiragana:"さる",katakana:"サル"}, romaji:"saru", emoji:"🐵"},
-
-    { id:"horse", title:"Horse", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Nokota_Horses_cropped.jpg/500px-Nokota_Horses_cropped.jpg",
-      kana:{hiragana:"うま",katakana:"ウマ"}, romaji:"uma", emoji:"🐴"},
-
-    { id:"cow", title:"Cattle", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Cow_female_black_white.jpg/500px-Cow_female_black_white.jpg",
-      kana:{hiragana:"うし",katakana:"ウシ"}, romaji:"ushi", emoji:"🐮"},
-
-    { id:"pig", title:"Pig", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Sow_with_piglets_crosroads_farm.jpg/500px-Sow_with_piglets_crosroads_farm.jpg",
-      kana:{hiragana:"ぶた",katakana:"ブタ"}, romaji:"buta", emoji:"🐷"},
-
-    { id:"sheep", title:"Sheep", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ovis_orientalis_aries_%27Skudde%27.jpg/500px-Ovis_orientalis_aries_%27Skudde%27.jpg",
-      kana:{hiragana:"ひつじ",katakana:"ヒツジ"}, romaji:"hitsuji", emoji:"🐑"},
-
-    { id:"goat", title:"Goat", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Domestic_goat_kid_in_capeweed.jpg/500px-Domestic_goat_kid_in_capeweed.jpg",
-      kana:{hiragana:"やぎ",katakana:"ヤギ"}, romaji:"yagi", emoji:"🐐"},
-
-    { id:"chicken", title:"Chicken", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/GallusGallus2.jpg/500px-GallusGallus2.jpg",
-      kana:{hiragana:"にわとり",katakana:"ニワトリ"}, romaji:"niwatori", emoji:"🐔"},
-
-    { id:"duck", title:"Duck", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Mallard2.jpg/500px-Mallard2.jpg",
-      kana:{hiragana:"あひる",katakana:"アヒル"}, romaji:"ahiru", emoji:"🦆"},
-
-    { id:"penguin", title:"Emperor penguin", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_%28Pygoscelis_antarctica%29_04.jpg/500px-South_Shetland-2016-Deception_Island%E2%80%93Chinstrap_penguin_%28Pygoscelis_antarctica%29_04.jpg",
-      kana:{hiragana:"ぺんぎん",katakana:"ペンギン"}, romaji:"pengin", emoji:"🐧"},
-
-    { id:"dolphin", title:"Dolphin", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Tursiops_truncatus_01.jpg/500px-Tursiops_truncatus_01.jpg",
-      kana:{hiragana:"いるか",katakana:"イルカ"}, romaji:"iruka", emoji:"🐬"},
-
-    { id:"whale", title:"Humpback whale", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Humpback_whale_underwater_shot.jpg/500px-Humpback_whale_underwater_shot.jpg",
-      kana:{hiragana:"くじら",katakana:"クジラ"}, romaji:"kujira", emoji:"🐋"},
-
-    { id:"shark", title:"Great white shark", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/White_shark.jpg/500px-White_shark.jpg",
-      kana:{hiragana:"さめ",katakana:"サメ"}, romaji:"same", emoji:"🦈"},
-
-    { id:"octopus", title:"Octopus", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Octopus3.jpg/500px-Octopus3.jpg",
-      kana:{hiragana:"たこ",katakana:"タコ"}, romaji:"tako", emoji:"🐙"},
-
-    { id:"crab", title:"Crab", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Blue-crab-on-wet-surface.jpg/500px-Blue-crab-on-wet-surface.jpg",
-      kana:{hiragana:"かに",katakana:"カニ"}, romaji:"kani", emoji:"🦀"},
-
-    { id:"frog", title:"Frog", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Frog_on_a_leaf.jpg/500px-Frog_on_a_leaf.jpg",
-      kana:{hiragana:"かえる",katakana:"カエル"}, romaji:"kaeru", emoji:"🐸"},
-
-    { id:"snake", title:"Snake", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Head_of_a_Rough-scaled_Bush_Viper.jpg/500px-Head_of_a_Rough-scaled_Bush_Viper.jpg",
-      kana:{hiragana:"へび",katakana:"ヘビ"}, romaji:"hebi", emoji:"🐍"},
-
-    { id:"turtle", title:"Sea turtle", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Florida_box_turtle_digon3.jpg/500px-Florida_box_turtle_digon3.jpg",
-      kana:{hiragana:"かめ",katakana:"カメ"}, romaji:"kame", emoji:"🐢"},
-
-    { id:"kangaroo", title:"Kangaroo", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Kangaroo_and_joey03.jpg/500px-Kangaroo_and_joey03.jpg",
-      kana:{hiragana:"かんがるー",katakana:"カンガルー"}, romaji:"kangaroo", emoji:"🦘"},
-
-    { id:"koala", title:"Koala", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Koala_climbing_tree.jpg/500px-Koala_climbing_tree.jpg",
-      kana:{hiragana:"こあら",katakana:"コアラ"}, romaji:"koala", emoji:"🐨"},
-
-    { id:"zebra", title:"Zebra", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Plains_Zebra_Equus_quagga.jpg/500px-Plains_Zebra_Equus_quagga.jpg",
-      kana:{hiragana:"しまうま",katakana:"シマウマ"}, romaji:"shimauma", emoji:"🦓"},
-
-    { id:"hippopotamus", title:"Hippopotamus", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Hippo_at_the_Hluhluwe-Imfolozi_Game_Reserve.jpg/500px-Hippo_at_the_Hluhluwe-Imfolozi_Game_Reserve.jpg",
-      kana:{hiragana:"かば",katakana:"カバ"}, romaji:"kaba", emoji:"🦛"},
-
-    { id:"rhinoceros", title:"Rhinoceros", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Rhinoceros_unicornis_-_Whipsnade.jpg/500px-Rhinoceros_unicornis_-_Whipsnade.jpg",
-      kana:{hiragana:"さい",katakana:"サイ"}, romaji:"sai", emoji:"🦏"},
-
-    { id:"camel", title:"Camel", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Single_Humped_Camel.jpg/500px-Single_Humped_Camel.jpg",
-      kana:{hiragana:"らくだ",katakana:"ラクダ"}, romaji:"rakuda", emoji:"🐫"},
-
-    { id:"leopard", title:"Leopard", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Leopard_africa.jpg/500px-Leopard_africa.jpg",
-      kana:{hiragana:"ひょう",katakana:"ヒョウ"}, romaji:"hyou", emoji:"🐆"},
-
-    { id:"cheetah", title:"Cheetah", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Cheetah_portrait.jpg/500px-Cheetah_portrait.jpg",
-      kana:{hiragana:"ちーたー",katakana:"チーター"}, romaji:"cheetah", emoji:"🐆"},
-
-    { id:"owl", title:"Owl", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Tawny-owl.jpg/500px-Tawny-owl.jpg",
-      kana:{hiragana:"ふくろう",katakana:"フクロウ"}, romaji:"fukurou", emoji:"🦉"},
-
-    { id:"parrot", title:"Parrot", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ara_macao_-on_a_stick.jpg/500px-Ara_macao_-on_a_stick.jpg",
-      kana:{hiragana:"おうむ",katakana:"オウム"}, romaji:"oumu", emoji:"🦜"},
-
-    { id:"eagle", title:"Golden eagle", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Bald_Eagle_Portrait.jpg/500px-Bald_Eagle_Portrait.jpg",
-      kana:{hiragana:"わし",katakana:"ワシ"}, romaji:"washi", emoji:"🦅"},
-
-    { id:"bat", title:"Bat", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Big_Brown_Bat_%28Eptesicus_fuscus%29.jpg/500px-Big_Brown_Bat_%28Eptesicus_fuscus%29.jpg",
-      kana:{hiragana:"こうもり",katakana:"コウモリ"}, romaji:"koumori", emoji:"🦇"},
-
-    { id:"hedgehog", title:"Hedgehog", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Erinaceus_europaeus_LC0119.jpg/500px-Erinaceus_europaeus_LC0119.jpg",
-      kana:{hiragana:"はりねずみ",katakana:"ハリネズミ"}, romaji:"harinezumi", emoji:"🦔"},
-
-    { id:"squirrel", title:"Squirrel", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Red_squirrel_%28Sciurus_vulgaris%29_in_Ystad_2015.jpg/500px-Red_squirrel_%28Sciurus_vulgaris%29_in_Ystad_2015.jpg",
-      kana:{hiragana:"りす",katakana:"リス"}, romaji:"risu", emoji:"🐿️"},
-
-    { id:"mouse", title:"House mouse", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/House_mouse_02.jpg/500px-House_mouse_02.jpg",
-      kana:{hiragana:"ねずみ",katakana:"ネズミ"}, romaji:"nezumi", emoji:"🐭"},
-
-    { id:"ant", title:"Ant", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Pogonomyrmex_badius.jpg/500px-Pogonomyrmex_badius.jpg",
-      kana:{hiragana:"あり",katakana:"アリ"}, romaji:"ari", emoji:"🐜"},
-
-    { id:"bee", title:"Honey bee", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Western_honey_bee_extracts_nectar.jpg/500px-Western_honey_bee_extracts_nectar.jpg",
-      kana:{hiragana:"みつばち",katakana:"ミツバチ"}, romaji:"mitsubachi", emoji:"🐝"},
-
-    { id:"butterfly", title:"Butterfly", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Cattleheart_Butterfly_%28Parides_arcas%29.jpg/500px-Cattleheart_Butterfly_%28Parides_arcas%29.jpg",
-      kana:{hiragana:"ちょう",katakana:"チョウ"}, romaji:"chou", emoji:"🦋"},
-
-    { id:"ladybug", title:"Coccinellidae", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Coccinella_magnifica01.jpg/500px-Coccinella_magnifica01.jpg",
-      kana:{hiragana:"てんとうむし",katakana:"テントウムシ"}, romaji:"tentoumushi", emoji:"🐞"},
-
-    { id:"crocodile", title:"Crocodile", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Nile_crocodile_head.jpg/500px-Nile_crocodile_head.jpg",
-      kana:{hiragana:"わに",katakana:"ワニ"}, romaji:"wani", emoji:"🐊"},
-
-    { id:"seal", title:"Seal", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Leopard_seal_2.jpg/500px-Leopard_seal_2.jpg",
-      kana:{hiragana:"あざらし",katakana:"アザラシ"}, romaji:"azarashi", emoji:"🦭"},
-
-    { id:"otter", title:"Otter", topicId:"animals",
-      image:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Otter_%28Lutra_lutra%29.jpg/500px-Otter_%28Lutra_lutra%29.jpg",
-      kana:{hiragana:"かわうそ",katakana:"カワウソ"}, romaji:"kawauso", emoji:"🦦"},
-  ]
+const DATA_URL = "https://script.google.com/macros/s/AKfycbx4-RVM7zUulVcK1EZbNXY3wWcsRp-SRWoNH7VxpqOfh96GbvHJAx-R8EfN2Cdj1kz1_w/exec";
+let DATA = {
+  version: "remote",
+  topics: [],
+  cards: []
 };
+
+async function loadAppData() {
+  try {
+    const res = await fetch(DATA_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+
+    const topics = Array.isArray(json?.topics) ? json.topics : [];
+    const cards = Array.isArray(json?.cards) ? json.cards : [];
+
+    DATA = {
+      version: json?.version || "remote",
+      topics,
+      cards
+    };
+
+    return true;
+  } catch (error) {
+    console.error('Failed to load app data:', error);
+    alert('Không thể tải dữ liệu từ server. Vui lòng thử lại.');
+    return false;
+  }
+}
 
 // ══════════════════════════════════════
 // STATE & SETTINGS
@@ -1507,10 +1106,32 @@ const soundBtn = document.getElementById('sound-btn');
 const completeScreen = document.getElementById('complete-screen');
 const swipeHint = document.getElementById('swipe-hint');
 const autospeakIndicator = document.getElementById('autospeak-indicator');
+const topicGrid = document.querySelector('.topic-grid');
 
 // ══════════════════════════════════════
 // HOME PAGE LOGIC
 // ══════════════════════════════════════
+function renderTopicButtons() {
+  topicGrid.innerHTML = '';
+
+  DATA.topics.forEach(topic => {
+    const count = DATA.cards.filter(card => card.topicId === topic.id).length;
+    const button = document.createElement('button');
+    button.className = 'topic-btn';
+    button.dataset.topic = topic.id;
+    button.innerHTML = `
+      <span class="icon">${topic.emoji || '📚'}</span>
+      <span class="jp-name">${topic.name || topic.id}</span>
+      <span class="count">${count} cards</span>
+    `;
+    topicGrid.appendChild(button);
+  });
+
+  if (!DATA.topics.some(topic => topic.id === settings.topicId)) {
+    settings.topicId = DATA.topics[0]?.id || '';
+  }
+}
+
 function applyHomepageSettings() {
   // Script buttons
   document.querySelectorAll('.script-btn').forEach(btn => {
@@ -1533,13 +1154,14 @@ document.querySelectorAll('.script-btn').forEach(btn => {
   });
 });
 
-document.querySelectorAll('.topic-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    settings.topicId = btn.dataset.topic;
-    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    saveSettings();
-  });
+topicGrid.addEventListener('click', (e) => {
+  const btn = e.target.closest('.topic-btn');
+  if (!btn) return;
+
+  settings.topicId = btn.dataset.topic;
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  saveSettings();
 });
 
 document.getElementById('auto-speak-toggle').addEventListener('change', (e) => {
@@ -1548,6 +1170,7 @@ document.getElementById('auto-speak-toggle').addEventListener('change', (e) => {
 });
 
 document.getElementById('start-btn').addEventListener('click', () => {
+  if (!DATA.cards.length) return;
   saveSettings();
   startFlashcards();
 });
@@ -1558,6 +1181,7 @@ document.getElementById('start-btn').addEventListener('click', () => {
 function startFlashcards() {
   // Filter + shuffle
   const filtered = DATA.cards.filter(c => c.topicId === settings.topicId);
+  if (!filtered.length) return;
   cards = shuffle(filtered);
   currentIndex = 0;
   isFlipped = false;
@@ -1873,8 +1497,16 @@ function showAutospeakIndicator() {
 // ══════════════════════════════════════
 // INIT
 // ══════════════════════════════════════
-loadSettings();
-applyHomepageSettings();
+async function initApp() {
+  loadSettings();
+  const loaded = await loadAppData();
+  if (!loaded) return;
+
+  renderTopicButtons();
+  applyHomepageSettings();
+}
+
+initApp();
 </script>
 </body>
 </html>
