@@ -1,4 +1,17 @@
 // ══════════════════════════════════════
+// LOADING STATE
+// ══════════════════════════════════════
+const loadingOverlay = document.getElementById('loading-overlay');
+
+function showLoading() {
+  loadingOverlay.classList.remove('hidden');
+}
+
+function hideLoading() {
+  loadingOverlay.classList.add('hidden');
+}
+
+// ══════════════════════════════════════
 // DATA
 // ══════════════════════════════════════
 const DATA_URL = "https://script.google.com/macros/s/AKfycby7rIeJEfB5c-N73Mu9HLzn4It1WChPjhQhKep5XbhgwMYVsuJopFrwrfMSihYU7OHETg/exec";
@@ -9,6 +22,8 @@ let DATA = {
 
 async function loadAppData() {
   try {
+    showLoading(); // 🔴 Show loading
+    
     const res = await fetch(DATA_URL, { cache: 'no-store' });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json = await res.json();
@@ -23,9 +38,11 @@ async function loadAppData() {
       document.getElementById('version-text').textContent = `v${json.settings.version}`;
     }
 
+    hideLoading(); // 🟢 Hide loading
     return true;
   } catch (error) {
     console.error('Failed to load app data:', error);
+    hideLoading(); // 🟢 Hide loading on error
     alert('Không thể tải dữ liệu từ server. Vui lòng thử lại.');
     return false;
   }
@@ -150,7 +167,10 @@ document.getElementById('auto-speak-toggle').addEventListener('change', (e) => {
 });
 
 document.getElementById('start-btn').addEventListener('click', () => {
-  if (!DATA.cards.length) return;
+  if (!DATA.cards.length) {
+    alert('Dữ liệu chưa được tải. Vui lòng thử lại.');
+    return;
+  }
   saveSettings();
   startFlashcards();
 });
