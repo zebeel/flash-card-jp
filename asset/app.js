@@ -14,7 +14,7 @@ function hideLoading() {
 // ══════════════════════════════════════
 // DATA
 // ══════════════════════════════════════
-const DATA_URL = "https://script.google.com/macros/s/AKfycby7rIeJEfB5c-N73Mu9HLzn4It1WChPjhQhKep5XbhgwMYVsuJopFrwrfMSihYU7OHETg/exec";
+const DATA_URL = "https://script.google.com/macros/s/AKfycbwVnyfssGfTau1vbJa4uMyBOKeEPr3SaSCou6nR2LhZfpkOjiM9-46bwtVodRTWb8SY/exec";
 let DATA = {
   topics: [],
   cards: []
@@ -305,7 +305,8 @@ function flipCard() {
 
   if (isFlipped && settings.autoSpeak) {
     setTimeout(() => {
-      speak(cards[currentIndex].kana[settings.script]);
+      const card = cards[currentIndex];
+      speak(card.kana[settings.script], card.audio);
       showAutospeakIndicator();
     }, 300);
   }
@@ -475,10 +476,29 @@ document.addEventListener('keydown', (e) => {
 // SPEECH SYNTHESIS
 // ══════════════════════════════════════
 let currentUtterance = null;
+let currentAudio = null;
 
-function speak(text) {
-  if (!('speechSynthesis' in window)) return;
+function speak(text, audioUrl = '') {
+  const hasAudioUrl = typeof audioUrl === 'string' && audioUrl.trim();
   cancelSpeech();
+
+  if (hasAudioUrl) {
+    const audio = new Audio(audioUrl.trim());
+    currentAudio = audio;
+    soundBtn.classList.add('playing');
+
+    const finishPlayback = () => {
+      soundBtn.classList.remove('playing');
+      currentAudio = null;
+    };
+
+    audio.onended = finishPlayback;
+    audio.onerror = finishPlayback;
+    audio.play().catch(finishPlayback);
+    return;
+  }
+
+  if (!('speechSynthesis' in window)) return;
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'ja-JP';
   utter.rate = 0.85;
@@ -498,6 +518,11 @@ function speak(text) {
 }
 
 function cancelSpeech() {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    currentAudio = null;
+  }
   if ('speechSynthesis' in window) speechSynthesis.cancel();
   soundBtn.classList.remove('playing');
   currentUtterance = null;
@@ -505,8 +530,9 @@ function cancelSpeech() {
 
 soundBtn.addEventListener('click', (e) => {
   e.stopPropagation();
-  const kana = cards[currentIndex]?.kana[settings.script];
-  if (kana) speak(kana);
+  const card = cards[currentIndex];
+  const kana = card?.kana[settings.script];
+  if (kana) speak(kana, card?.audio);
 });
 
 function showAutospeakIndicator() {
