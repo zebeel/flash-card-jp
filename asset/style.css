@@ -313,6 +313,55 @@ body::before {
   transform: translateX(22px);
 }
 
+/* Card order toggle */
+.order-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.order-btn {
+  padding: 12px 8px;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--washi);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s var(--trans);
+}
+
+.order-btn .jp {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.order-btn .en {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+  margin-top: 2px;
+}
+
+.order-btn.active {
+  border-color: var(--sage);
+  background: #f1f8f2;
+}
+
+.order-btn.active .jp,
+.order-btn.active .en {
+  color: var(--sage);
+}
+
+.order-btn:hover:not(.active) {
+  border-color: rgba(107,143,113,0.35);
+  transform: translateY(-1px);
+}
+
 /* Start button */
 .start-btn {
   width: 100%;

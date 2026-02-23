@@ -54,7 +54,8 @@ async function loadAppData() {
 let settings = {
   script: 'hiragana',
   topicId: 'shinkansen',
-  autoSpeak: false
+  autoSpeak: false,
+  cardOrder: 'shuffle'
 };
 
 let cards = [];
@@ -66,6 +67,10 @@ function loadSettings() {
     const saved = JSON.parse(localStorage.getItem('jpFlashSettings') || '{}');
     settings = { ...settings, ...saved };
   } catch(e) {}
+
+  if (!['shuffle', 'sequential'].includes(settings.cardOrder)) {
+    settings.cardOrder = 'shuffle';
+  }
 }
 
 function saveSettings() {
@@ -141,6 +146,10 @@ function applyHomepageSettings() {
   });
   // Auto speak
   document.getElementById('auto-speak-toggle').checked = settings.autoSpeak;
+  // Card order
+  document.querySelectorAll('.order-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.order === settings.cardOrder);
+  });
 }
 
 document.querySelectorAll('.script-btn').forEach(btn => {
@@ -166,6 +175,15 @@ document.getElementById('auto-speak-toggle').addEventListener('change', (e) => {
   saveSettings();
 });
 
+document.querySelectorAll('.order-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    settings.cardOrder = btn.dataset.order;
+    document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    saveSettings();
+  });
+});
+
 document.getElementById('start-btn').addEventListener('click', () => {
   if (!DATA.cards.length) {
     alert('Dữ liệu chưa được tải. Vui lòng thử lại.');
@@ -182,7 +200,7 @@ function startFlashcards() {
   const filtered = DATA.cards.filter(c => c.topicId === settings.topicId);
   if (!filtered.length) return;
   
-  cards = shuffle(filtered);
+  cards = settings.cardOrder === 'sequential' ? [...filtered] : shuffle(filtered);
   currentIndex = 0;
   isFlipped = false;
 
