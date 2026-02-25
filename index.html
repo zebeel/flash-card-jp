@@ -1,181 +1,190 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>日本語フラッシュカード</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="asset/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>日本語フラッシュカード</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="asset/style.css">
 </head>
+
 <body>
-<div id="app">
+  <div id="app">
 
-  <!-- ══════ LOADING OVERLAY ══════ -->
-  <div class="loading-overlay" id="loading-overlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Đang tải...</div>
-  </div>
-
-  <!-- ══════ HOME PAGE ══════ -->
-  <div id="home-page" class="page">
-    <div class="home-header">
-      <div class="jp-title">Học tiếng Nhật</div>
-      <h1>Flash<span>Card</span></h1>
+    <!-- ══════ LOADING OVERLAY ══════ -->
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">Đang tải...</div>
     </div>
-    <div class="stripe-decor"></div>
 
-    <div class="home-body">
-      <!-- Script selection -->
-      <div class="setting-card">
-        <div class="setting-label">Loại chữ</div>
-        <div class="script-toggle">
-          <button class="script-btn active" data-script="hiragana">
-            <span class="jp">あ</span>
-            <span class="en">Chữ mềm Hiragana</span>
-          </button>
-          <button class="script-btn" data-script="katakana">
-            <span class="jp">ア</span>
-            <span class="en">Chữ cứng Katakana</span>
-          </button>
-        </div>
+    <!-- ══════ HOME PAGE ══════ -->
+    <div id="home-page" class="page">
+      <div class="home-header">
+        <div class="jp-title">Học tiếng Nhật</div>
+        <h1>Flash<span>Card</span></h1>
       </div>
+      <div class="stripe-decor"></div>
 
-      <!-- Topic selection -->
-      <div class="setting-card">
-        <div class="setting-label">Chủ đề</div>
-        <div class="topic-grid">
-          <button class="topic-btn active" data-topic="shinkansen">
-            <span class="icon">🚄</span>
-            <span class="jp-name">Shinkansen</span>
-            <span class="count">- cards</span>
-          </button>
-          <button class="topic-btn" data-topic="animals">
-            <span class="icon">🐾</span>
-            <span class="jp-name">Động vật</span>
-            <span class="count">- cards</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Auto speak -->
-      <div class="setting-card">
-        <div class="setting-label">Tự động đọc</div>
-        <div class="auto-speak-row">
-          <div class="auto-speak-info">
-            <div class="title">Tự động phát âm</div>
-            <!-- <div class="desc">カードを裏返すと<br>自動で読み上げます</div> -->
+      <div class="home-body">
+        <!-- Script selection -->
+        <div class="setting-card">
+          <div class="setting-label">Loại chữ</div>
+          <div class="script-toggle">
+            <button class="script-btn active" data-script="hiragana">
+              <span class="jp">あ</span>
+              <span class="en">Hiragana</span>
+            </button>
+            <button class="script-btn" data-script="katakana">
+              <span class="jp">ア</span>
+              <span class="en">Katakana</span>
+            </button>
           </div>
-          <label class="toggle">
-            <input type="checkbox" id="auto-speak-toggle">
-            <div class="toggle-track">
-              <div class="toggle-thumb"></div>
-            </div>
-          </label>
         </div>
-      </div>
 
-      <!-- Card order -->
-      <div class="setting-card">
-        <div class="setting-label">Thứ tự thẻ</div>
-        <div class="order-toggle" id="card-order-toggle">
-          <button class="order-btn" data-order="sequential">
-            <span class="jp">Thứ tự</span>
-            <span class="en">Sequential</span>
-          </button>
-          <button class="order-btn" data-order="shuffle">
-            <span class="jp">Xáo trộn</span>
-            <span class="en">Shuffle</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Start button -->
-      <button class="start-btn" id="start-btn">
-        はじめる · Start
-        <span class="arrow">→</span>
-      </button>
-
-      <!-- Version info -->
-      <div class="version-info" id="version-info">
-        <span id="version-text">v-</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════ FLASHCARD PAGE ══════ -->
-  <div id="flash-page" class="page hidden">
-    <!-- Top bar -->
-    <div class="flash-topbar">
-      <button class="back-btn" id="back-btn">←</button>
-      <div class="progress-info">
-        <div class="progress-text" id="progress-text">1 / 7</div>
-        <div class="progress-sub">カード</div>
-      </div>
-      <button class="shuffle-btn" id="shuffle-btn" title="Shuffle">⇌</button>
-    </div>
-
-    <!-- Progress bar -->
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
-    </div>
-
-    <!-- Card area -->
-    <div class="card-area" id="card-area">
-      <div class="card-scene" id="card-scene">
-        <div class="card-inner" id="card-inner">
-          <!-- Front -->
-          <div class="card-face card-front" id="card-front">
-            <div class="card-image-wrap" id="card-image-wrap">
-              <img class="card-img" id="card-img" src="" alt="" />
-              <div class="card-img-fallback" id="card-img-fallback"></div>
-            </div>
-            <div class="card-front-label">
-              <div class="romaji" id="card-romaji">nozomi</div>
-            </div>
-            <div class="tap-hint">TAP</div>
+        <!-- Topic selection -->
+        <div class="setting-card">
+          <div class="setting-label">Chủ đề</div>
+          <div class="topic-grid">
+            <button class="topic-btn active" data-topic="shinkansen">
+              <span class="icon">🚄</span>
+              <span class="jp-name">Shinkansen</span>
+              <span class="count">- cards</span>
+            </button>
+            <button class="topic-btn" data-topic="animals">
+              <span class="icon">🐾</span>
+              <span class="jp-name">Động vật</span>
+              <span class="count">- cards</span>
+            </button>
           </div>
-          <!-- Back -->
-          <div class="card-face card-back" id="card-back">
-            <div class="card-back-content">
-              <div class="kana-display" id="kana-display">のぞみ</div>
+        </div>
+
+        <!-- Options -->
+        <div class="setting-card">
+          <div class="setting-label">Tùy chọn</div>
+          <div class="options-list">
+            <!-- Auto speak -->
+            <div class="options-row">
+              <div class="option-info">
+                <span class="option-icon">🔊</span>
+                <span class="option-title">Tự động phát âm</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="auto-speak-toggle">
+                <div class="toggle-track">
+                  <div class="toggle-thumb"></div>
+                </div>
+              </label>
             </div>
-            <div class="card-back-footer">
-              <div class="kana-romaji" id="kana-romaji-back">nozomi</div>
-              <button class="sound-btn" id="sound-btn">🔊</button>
+
+            <div class="options-divider"></div>
+
+            <!-- Card order -->
+            <div class="options-row">
+              <div class="option-info">
+                <span class="option-icon">🔀</span>
+                <span class="option-title">Xáo trộn thẻ</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="card-order-toggle-checkbox">
+                <div class="toggle-track">
+                  <div class="toggle-thumb"></div>
+                </div>
+              </label>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="swipe-hint" id="swipe-hint">
-        <span>← prev</span>
-        <span class="dot"></span>
-        <span>swipe</span>
-        <span class="dot"></span>
-        <span>next →</span>
+        <!-- Start button -->
+        <button class="start-btn" id="start-btn">
+          Bắt đầu
+          <span class="arrow">→</span>
+        </button>
+
+        <!-- Version info -->
+        <div class="version-info" id="version-info">
+          <span id="version-text">v-</span>
+        </div>
       </div>
     </div>
 
-    <!-- Complete screen -->
-    <div class="complete-screen" id="complete-screen">
-      <div class="complete-kanji">完了</div>
-      <div class="complete-title">よくできました！</div>
-      <div class="complete-sub">Well done! You've reviewed all cards.</div>
-      <button class="complete-btn complete-btn-primary" id="restart-btn">
-        もう一度 · Play Again
-      </button>
-      <button class="complete-btn complete-btn-secondary" id="home-from-complete-btn">
-        ホーム · Home
-      </button>
+    <!-- ══════ FLASHCARD PAGE ══════ -->
+    <div id="flash-page" class="page hidden">
+      <!-- Top bar -->
+      <div class="flash-topbar">
+        <button class="back-btn" id="back-btn">←</button>
+        <div class="progress-info">
+          <div class="progress-text" id="progress-text">1 / 7</div>
+          <div class="progress-sub">カード</div>
+        </div>
+        <button class="shuffle-btn" id="shuffle-btn" title="Shuffle">⇌</button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+
+      <!-- Card area -->
+      <div class="card-area" id="card-area">
+        <div class="card-scene" id="card-scene">
+          <div class="card-inner" id="card-inner">
+            <!-- Front -->
+            <div class="card-face card-front" id="card-front">
+              <div class="card-image-wrap" id="card-image-wrap">
+                <img class="card-img" id="card-img" src="" alt="" />
+                <div class="card-img-fallback" id="card-img-fallback"></div>
+              </div>
+              <div class="card-front-label">
+                <div class="romaji" id="card-romaji">nozomi</div>
+              </div>
+              <div class="tap-hint">TAP</div>
+            </div>
+            <!-- Back -->
+            <div class="card-face card-back" id="card-back">
+              <div class="card-back-content">
+                <div class="kana-display" id="kana-display">のぞみ</div>
+              </div>
+              <div class="card-back-footer">
+                <div class="kana-romaji" id="kana-romaji-back">nozomi</div>
+                <button class="sound-btn" id="sound-btn">🔊</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="swipe-hint" id="swipe-hint">
+          <span>← prev</span>
+          <span class="dot"></span>
+          <span>swipe</span>
+          <span class="dot"></span>
+          <span>next →</span>
+        </div>
+      </div>
+
+      <!-- Complete screen -->
+      <div class="complete-screen" id="complete-screen">
+        <div class="complete-kanji">Xong</div>
+        <div class="complete-title">Rất tốt!</div>
+        <div class="complete-sub">You've reviewed all cards.</div>
+        <button class="complete-btn complete-btn-primary" id="restart-btn">
+          Chơi lại
+        </button>
+        <button class="complete-btn complete-btn-secondary" id="home-from-complete-btn">
+          Về trang chủ
+        </button>
+      </div>
     </div>
+
+    <!-- Auto speak toast -->
+    <div class="autospeak-indicator" id="autospeak-indicator">🔊 Đã tự đọc</div>
   </div>
 
-  <!-- Auto speak toast -->
-  <div class="autospeak-indicator" id="autospeak-indicator">🔊 自動読み</div>
-</div>
-
-<script src="asset/app.js"></script>
+  <script src="asset/app.js"></script>
 </body>
+
 </html>

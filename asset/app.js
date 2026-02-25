@@ -147,9 +147,10 @@ function applyHomepageSettings() {
   // Auto speak
   document.getElementById('auto-speak-toggle').checked = settings.autoSpeak;
   // Card order
-  document.querySelectorAll('.order-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.order === settings.cardOrder);
-  });
+  const orderToggle = document.getElementById('card-order-toggle-checkbox');
+  if (orderToggle) {
+    orderToggle.checked = (settings.cardOrder === 'shuffle');
+  }
 }
 
 document.querySelectorAll('.script-btn').forEach(btn => {
@@ -175,14 +176,13 @@ document.getElementById('auto-speak-toggle').addEventListener('change', (e) => {
   saveSettings();
 });
 
-document.querySelectorAll('.order-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    settings.cardOrder = btn.dataset.order;
-    document.querySelectorAll('.order-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+const orderToggleCheckbox = document.getElementById('card-order-toggle-checkbox');
+if (orderToggleCheckbox) {
+  orderToggleCheckbox.addEventListener('change', (e) => {
+    settings.cardOrder = e.target.checked ? 'shuffle' : 'sequential';
     saveSettings();
   });
-});
+}
 
 document.getElementById('start-btn').addEventListener('click', () => {
   if (!DATA.cards.length) {

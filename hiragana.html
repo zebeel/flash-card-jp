@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bảng chữ Hiragana - Thứ tự nét viết</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  p.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+  }
+  .section-title {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin: 20px 0 10px;
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 12px 8px 8px;
+    text-align: center;
+    width: 110px;
+    transition: transform 0.2s;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+  }
+  .card .kana {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    margin-top: 4px;
+  }
+  .card .romaji {
+    font-size: 0.85em;
+    color: #888;
+  }
+  .error-img {
+    width: 80px;
+    height: 80px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    border-radius: 6px;
+    margin: 0 auto;
+    color: #999;
+  }
+</style>
+</head>
+<body>
+
+<h1>🇯🇵 Bảng chữ Hiragana — Thứ tự nét viết</h1>
+<p class="subtitle">Ảnh GIF từ Wikimedia Commons · Di chuột để xem animation</p>
+
+<div class="section-title">Nguyên âm (母音)</div>
+<div class="grid" id="vowels"></div>
+
+<div class="section-title">K hàng (か行)</div>
+<div class="grid" id="k-row"></div>
+
+<div class="section-title">S hàng (さ行)</div>
+<div class="grid" id="s-row"></div>
+
+<div class="section-title">T hàng (た行)</div>
+<div class="grid" id="t-row"></div>
+
+<div class="section-title">N hàng (な行)</div>
+<div class="grid" id="n-row"></div>
+
+<div class="section-title">H hàng (は行)</div>
+<div class="grid" id="h-row"></div>
+
+<div class="section-title">M hàng (ま行)</div>
+<div class="grid" id="m-row"></div>
+
+<div class="section-title">Y hàng (や行)</div>
+<div class="grid" id="y-row"></div>
+
+<div class="section-title">R hàng (ら行)</div>
+<div class="grid" id="r-row"></div>
+
+<div class="section-title">W hàng & N (わ行・ん)</div>
+<div class="grid" id="w-row"></div>
+
+<div class="section-title">Dakuten (濁音) — Có dấu ゛</div>
+<div class="grid" id="dakuten"></div>
+
+<div class="section-title">Handakuten (半濁音) — Có dấu ゜</div>
+<div class="grid" id="handakuten"></div>
+
+<script>
+// Wikimedia Commons direct file URL pattern:
+// https://upload.wikimedia.org/wikipedia/commons/[hash_path]/Hiragana_%E3%XX%XX_stroke_order_animation.gif
+// We use the standard Commons file URL via redirect:
+// https://commons.wikimedia.org/wiki/Special:FilePath/Hiragana_%E3%81%82_stroke_order_animation.gif
+
+function gifUrl(encoded) {
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/Hiragana_${encoded}_stroke_order_animation.gif`;
+}
+
+const data = {
+  vowels: [
+    { kana: 'あ', romaji: 'a', enc: '%E3%81%82' },
+    { kana: 'い', romaji: 'i', enc: '%E3%81%84' },
+    { kana: 'う', romaji: 'u', enc: '%E3%81%86' },
+    { kana: 'え', romaji: 'e', enc: '%E3%81%88' },
+    { kana: 'お', romaji: 'o', enc: '%E3%81%8A' },
+  ],
+  'k-row': [
+    { kana: 'か', romaji: 'ka', enc: '%E3%81%8B' },
+    { kana: 'き', romaji: 'ki', enc: '%E3%81%8D' },
+    { kana: 'く', romaji: 'ku', enc: '%E3%81%8F' },
+    { kana: 'け', romaji: 'ke', enc: '%E3%81%91' },
+    { kana: 'こ', romaji: 'ko', enc: '%E3%81%93' },
+  ],
+  's-row': [
+    { kana: 'さ', romaji: 'sa', enc: '%E3%81%95' },
+    { kana: 'し', romaji: 'shi', enc: '%E3%81%97' },
+    { kana: 'す', romaji: 'su', enc: '%E3%81%99' },
+    { kana: 'せ', romaji: 'se', enc: '%E3%81%9B' },
+    { kana: 'そ', romaji: 'so', enc: '%E3%81%9D' },
+  ],
+  't-row': [
+    { kana: 'た', romaji: 'ta', enc: '%E3%81%9F' },
+    { kana: 'ち', romaji: 'chi', enc: '%E3%81%A1' },
+    { kana: 'つ', romaji: 'tsu', enc: '%E3%81%A4' },
+    { kana: 'て', romaji: 'te', enc: '%E3%81%A6' },
+    { kana: 'と', romaji: 'to', enc: '%E3%81%A8' },
+  ],
+  'n-row': [
+    { kana: 'な', romaji: 'na', enc: '%E3%81%AA' },
+    { kana: 'に', romaji: 'ni', enc: '%E3%81%AB' },
+    { kana: 'ぬ', romaji: 'nu', enc: '%E3%81%AC' },
+    { kana: 'ね', romaji: 'ne', enc: '%E3%81%AD' },
+    { kana: 'の', romaji: 'no', enc: '%E3%81%AE' },
+  ],
+  'h-row': [
+    { kana: 'は', romaji: 'ha', enc: '%E3%81%AF' },
+    { kana: 'ひ', romaji: 'hi', enc: '%E3%81%B2' },
+    { kana: 'ふ', romaji: 'fu', enc: '%E3%81%B5' },
+    { kana: 'へ', romaji: 'he', enc: '%E3%81%B8' },
+    { kana: 'ほ', romaji: 'ho', enc: '%E3%81%BB' },
+  ],
+  'm-row': [
+    { kana: 'ま', romaji: 'ma', enc: '%E3%81%BE' },
+    { kana: 'み', romaji: 'mi', enc: '%E3%81%BF' },
+    { kana: 'む', romaji: 'mu', enc: '%E3%82%80' },
+    { kana: 'め', romaji: 'me', enc: '%E3%82%81' },
+    { kana: 'も', romaji: 'mo', enc: '%E3%82%82' },
+  ],
+  'y-row': [
+    { kana: 'や', romaji: 'ya', enc: '%E3%82%84' },
+    { kana: 'ゆ', romaji: 'yu', enc: '%E3%82%86' },
+    { kana: 'よ', romaji: 'yo', enc: '%E3%82%88' },
+  ],
+  'r-row': [
+    { kana: 'ら', romaji: 'ra', enc: '%E3%82%89' },
+    { kana: 'り', romaji: 'ri', enc: '%E3%82%8A' },
+    { kana: 'る', romaji: 'ru', enc: '%E3%82%8B' },
+    { kana: 'れ', romaji: 're', enc: '%E3%82%8C' },
+    { kana: 'ろ', romaji: 'ro', enc: '%E3%82%8D' },
+  ],
+  'w-row': [
+    { kana: 'わ', romaji: 'wa', enc: '%E3%82%8F' },
+    { kana: 'ゐ', romaji: 'wi', enc: '%E3%82%90' },
+    { kana: 'ゑ', romaji: 'we', enc: '%E3%82%91' },
+    { kana: 'を', romaji: 'wo', enc: '%E3%82%92' },
+    { kana: 'ん', romaji: 'n', enc: '%E3%82%93' },
+  ],
+  dakuten: [
+    { kana: 'が', romaji: 'ga', enc: '%E3%81%8C' },
+    { kana: 'ぎ', romaji: 'gi', enc: '%E3%81%8E' },
+    { kana: 'ぐ', romaji: 'gu', enc: '%E3%81%90' },
+    { kana: 'げ', romaji: 'ge', enc: '%E3%81%92' },
+    { kana: 'ご', romaji: 'go', enc: '%E3%81%94' },
+    { kana: 'ざ', romaji: 'za', enc: '%E3%81%96' },
+    { kana: 'じ', romaji: 'ji', enc: '%E3%81%98' },
+    { kana: 'ず', romaji: 'zu', enc: '%E3%81%9A' },
+    { kana: 'ぜ', romaji: 'ze', enc: '%E3%81%9C' },
+    { kana: 'ぞ', romaji: 'zo', enc: '%E3%81%9E' },
+    { kana: 'だ', romaji: 'da', enc: '%E3%81%A0' },
+    { kana: 'ぢ', romaji: 'di', enc: '%E3%81%A2' },
+    { kana: 'づ', romaji: 'du', enc: '%E3%81%A5' },
+    { kana: 'で', romaji: 'de', enc: '%E3%81%A7' },
+    { kana: 'ど', romaji: 'do', enc: '%E3%81%A9' },
+    { kana: 'ば', romaji: 'ba', enc: '%E3%81%B0' },
+    { kana: 'び', romaji: 'bi', enc: '%E3%81%B3' },
+    { kana: 'ぶ', romaji: 'bu', enc: '%E3%81%B6' },
+    { kana: 'べ', romaji: 'be', enc: '%E3%81%B9' },
+    { kana: 'ぼ', romaji: 'bo', enc: '%E3%81%BC' },
+  ],
+  handakuten: [
+    { kana: 'ぱ', romaji: 'pa', enc: '%E3%81%B1' },
+    { kana: 'ぴ', romaji: 'pi', enc: '%E3%81%B4' },
+    { kana: 'ぷ', romaji: 'pu', enc: '%E3%81%B7' },
+    { kana: 'ぺ', romaji: 'pe', enc: '%E3%81%BA' },
+    { kana: 'ぽ', romaji: 'po', enc: '%E3%81%BD' },
+  ],
+};
+
+function renderSection(sectionId, items) {
+  const container = document.getElementById(sectionId);
+  items.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const url = gifUrl(item.enc);
+    card.innerHTML = `
+      <img src="${url}" alt="${item.kana} stroke order" 
+           onerror="this.outerHTML='<div class=\\'error-img\\'>${item.kana}</div>'" />
+      <div class="kana">${item.kana}</div>
+      <div class="romaji">${item.romaji}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+Object.keys(data).forEach(key => renderSection(key, data[key]));
+</script>
+</body>
+</html>
