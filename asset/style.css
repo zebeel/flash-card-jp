@@ -674,7 +674,7 @@ body::before {
   justify-content: center;
   transform: rotateY(180deg);
   position: relative;
-  height: stretch;
+  height: inherit;
 }
 
 .card-back-content {
